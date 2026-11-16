@@ -59,6 +59,19 @@ kbd.fkey {
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
+/* Touch & Mobile UX Utilities */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Print specific styles for hospital invoices */
 @media print {
   body * {

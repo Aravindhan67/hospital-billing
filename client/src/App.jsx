@@ -29,6 +29,7 @@ export default function App() {
   const [stats, setStats] = useState(null);
   const [settings, setSettings] = useState(null);
   const [globalSearch, setGlobalSearch] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Modals
   const [selectedInvoice, setSelectedInvoice] = useState(null);
@@ -158,16 +159,18 @@ export default function App() {
       isTrad ? 'theme-traditional bg-[#f1f5f9] text-slate-900' : 'bg-[#f8fafc] text-slate-700'
     }`}>
       
-      {/* Left Sidebar */}
+      {/* Left Sidebar (Responsive Drawer on mobile/tablet, Persistent on desktop) */}
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         stats={stats}
         theme={theme}
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Container */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-screen min-w-0 overflow-hidden">
         
         {/* Top Navbar */}
         <Navbar
@@ -179,10 +182,11 @@ export default function App() {
           theme={theme}
           setTheme={setTheme}
           setActiveTab={setActiveTab}
+          onOpenMobileMenu={() => setMobileMenuOpen(true)}
         />
 
         {/* Dynamic Page Body */}
-        <main className={`flex-1 overflow-y-auto p-5 md:p-7 ${
+        <main className={`flex-1 overflow-y-auto p-3.5 sm:p-5 md:p-7 ${
           isTrad ? 'bg-slate-100/90' : 'bg-[#f8fafc]'
         }`}>
           {activeTab === 'dashboard' && (

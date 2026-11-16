@@ -402,91 +402,93 @@ export default function NewInvoiceModal({ onClose, onInvoiceCreated, defaultType
               </button>
             </div>
 
-            <div className="divide-y divide-slate-100 p-2 space-y-2">
-              {items.map((item, idx) => (
-                <div key={item.id} className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg hover:bg-slate-50">
-                  <div className="col-span-4">
-                    <input
-                      type="text"
-                      value={item.description}
-                      onChange={(e) => handleUpdateItem(idx, 'description', e.target.value)}
-                      placeholder="Service / Medicine / Test Description"
-                      className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800"
-                      required
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <select
-                      value={item.category}
-                      onChange={(e) => handleUpdateItem(idx, 'category', e.target.value)}
-                      className="w-full px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600"
-                    >
-                      <option value="Consultation">Consultation</option>
-                      <option value="Bed Charges">Bed Tariff</option>
-                      <option value="Nursing Care">Nursing Care</option>
-                      <option value="Surgery">Surgery / OT</option>
-                      <option value="Diagnostics">Diagnostics</option>
-                      <option value="Pharmacy">Pharmacy</option>
-                      <option value="Procedure">Procedure</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div className="col-span-1">
-                    <input
-                      type="number"
-                      min="1"
-                      value={item.quantity}
-                      onChange={(e) => handleUpdateItem(idx, 'quantity', e.target.value)}
-                      placeholder="Qty"
-                      className="w-full px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold"
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <div className="relative">
-                      <span className="absolute left-2 top-1.5 text-slate-400">₹</span>
+            <div className="overflow-x-auto">
+              <div className="min-w-[620px] divide-y divide-slate-100 p-2 space-y-2">
+                {items.map((item, idx) => (
+                  <div key={item.id} className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg hover:bg-slate-50">
+                    <div className="col-span-4">
                       <input
-                        type="number"
-                        step="0.01"
-                        value={item.unitPrice}
-                        onChange={(e) => handleUpdateItem(idx, 'unitPrice', e.target.value)}
-                        placeholder="Rate"
-                        className="w-full pl-6 pr-2 py-1.5 bg-white border border-slate-200 rounded-lg text-right font-mono"
+                        type="text"
+                        value={item.description}
+                        onChange={(e) => handleUpdateItem(idx, 'description', e.target.value)}
+                        placeholder="Service / Medicine / Test Description"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-800"
+                        required
                       />
                     </div>
-                  </div>
 
-                  <div className="col-span-1">
-                    <select
-                      value={item.gstPercent}
-                      onChange={(e) => handleUpdateItem(idx, 'gstPercent', e.target.value)}
-                      className="w-full px-1.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
-                    >
-                      <option value="0">0%</option>
-                      <option value="5">5%</option>
-                      <option value="12">12%</option>
-                      <option value="18">18%</option>
-                    </select>
-                  </div>
+                    <div className="col-span-2">
+                      <select
+                        value={item.category}
+                        onChange={(e) => handleUpdateItem(idx, 'category', e.target.value)}
+                        className="w-full px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600"
+                      >
+                        <option value="Consultation">Consultation</option>
+                        <option value="Bed Charges">Bed Tariff</option>
+                        <option value="Nursing Care">Nursing Care</option>
+                        <option value="Surgery">Surgery / OT</option>
+                        <option value="Diagnostics">Diagnostics</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Procedure">Procedure</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
 
-                  <div className="col-span-1 text-right font-bold text-slate-800 font-mono">
-                    ₹{item.total.toLocaleString()}
-                  </div>
+                    <div className="col-span-1">
+                      <input
+                        type="number"
+                        min="1"
+                        value={item.quantity}
+                        onChange={(e) => handleUpdateItem(idx, 'quantity', e.target.value)}
+                        placeholder="Qty"
+                        className="w-full px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold"
+                      />
+                    </div>
 
-                  <div className="col-span-1 text-center">
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveItem(idx)}
-                      disabled={items.length <= 1}
-                      className="text-slate-300 hover:text-rose-500 disabled:opacity-30 p-1"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="col-span-2">
+                      <div className="relative">
+                        <span className="absolute left-2 top-1.5 text-slate-400">₹</span>
+                        <input
+                          type="number"
+                          step="0.01"
+                          value={item.unitPrice}
+                          onChange={(e) => handleUpdateItem(idx, 'unitPrice', e.target.value)}
+                          placeholder="Rate"
+                          className="w-full pl-6 pr-2 py-1.5 bg-white border border-slate-200 rounded-lg text-right font-mono"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="col-span-1">
+                      <select
+                        value={item.gstPercent}
+                        onChange={(e) => handleUpdateItem(idx, 'gstPercent', e.target.value)}
+                        className="w-full px-1.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
+                      >
+                        <option value="0">0%</option>
+                        <option value="5">5%</option>
+                        <option value="12">12%</option>
+                        <option value="18">18%</option>
+                      </select>
+                    </div>
+
+                    <div className="col-span-1 text-right font-bold text-slate-800 font-mono">
+                      ₹{item.total.toLocaleString()}
+                    </div>
+
+                    <div className="col-span-1 text-center">
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveItem(idx)}
+                        disabled={items.length <= 1}
+                        className="text-slate-300 hover:text-rose-500 disabled:opacity-30 p-1"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 

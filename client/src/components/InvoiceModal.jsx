@@ -417,10 +417,10 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
             <div>
               {/* Traditional Hospital Bill Header with Double Line */}
               <div className="border-b-2 border-slate-900 pb-4">
-                <div className="flex justify-between items-start">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
                   <div>
                     <div className="flex items-center space-x-2.5">
-                      <div className="w-9 h-9 border-2 border-slate-900 flex items-center justify-center font-bold text-base bg-slate-50 text-slate-900">
+                      <div className="w-9 h-9 border-2 border-slate-900 flex items-center justify-center font-bold text-base bg-slate-50 text-slate-900 shrink-0">
                         ✚
                       </div>
                       <div>
@@ -437,7 +437,7 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
                       {settings?.address || '42 Healthcare Avenue, Medical Enclave, Metro City - 600028'}
                     </p>
 
-                    <div className="flex items-center space-x-3 text-[11px] text-slate-600 mt-1 font-mono">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-600 mt-1 font-mono">
                       <span>Tel: {settings?.phone || '+91 (044) 2890-4400'}</span>
                       <span>•</span>
                       <span>Emergency: <strong className="text-rose-700">{settings?.emergency || '1066'}</strong></span>
@@ -447,7 +447,7 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
                   </div>
 
                   {/* Tax & Registration Meta Box */}
-                  <div className="border border-slate-900 p-2.5 text-right text-[11px] font-mono space-y-0.5 bg-slate-50/60 min-w-[210px]">
+                  <div className="border border-slate-900 p-2.5 text-left sm:text-right text-[11px] font-mono space-y-0.5 bg-slate-50/60 min-w-[210px] w-full sm:w-auto">
                     <p className="font-bold text-center border-b border-slate-400 pb-1 uppercase tracking-wider text-slate-900 text-[10px]">
                       TAX INVOICE / CASH BILL
                     </p>
@@ -460,7 +460,7 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
               </div>
 
               {/* Patient & Voucher Meta Box */}
-              <div className="grid grid-cols-2 border border-slate-900 divide-x divide-slate-900 text-xs my-4 font-mono">
+              <div className="grid grid-cols-1 md:grid-cols-2 border border-slate-900 divide-y md:divide-y-0 md:divide-x divide-slate-900 text-xs my-4 font-mono">
                 {/* Left: Patient Particulars */}
                 <div className="p-3 space-y-1">
                   <p className="font-bold uppercase text-[10px] text-slate-500 border-b border-slate-300 pb-0.5 mb-1 font-sans">
@@ -492,8 +492,8 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
               </div>
 
               {/* Traditional Itemized Ledger Table */}
-              <div className="my-4">
-                <table className="w-full text-left text-xs border border-slate-900">
+              <div className="my-4 overflow-x-auto">
+                <table className="w-full min-w-[580px] text-left text-xs border border-slate-900">
                   <thead className="bg-slate-100 text-slate-900 uppercase text-[10px] font-bold border-b border-slate-900 font-mono">
                     <tr className="divide-x divide-slate-900">
                       <th className="py-2 px-2.5 w-10 text-center">S.N.</th>
@@ -542,9 +542,9 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
               </div>
 
               {/* Traditional Accounting Math & Settlement Grid */}
-              <div className="grid grid-cols-12 gap-4 my-4 text-xs font-mono">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 my-4 text-xs font-mono">
                 {/* Left: Bank / Payment Particulars */}
-                <div className="col-span-7 border border-slate-900 p-3 space-y-2 bg-slate-50/40">
+                <div className="col-span-1 md:col-span-7 border border-slate-900 p-3 space-y-2 bg-slate-50/40">
                   <p className="font-bold text-slate-900 uppercase text-[10px] border-b border-slate-300 pb-1">
                     TRANSACTION & SETTLEMENT RECEIPT
                   </p>
@@ -566,7 +566,7 @@ export default function InvoiceModal({ invoice, settings, onClose, onPayBalance 
                 </div>
 
                 {/* Right: Calculations Box */}
-                <div className="col-span-5 border-2 border-slate-900 p-3.5 space-y-1.5 bg-slate-100/50 text-[11px]">
+                <div className="col-span-1 md:col-span-5 border-2 border-slate-900 p-3.5 space-y-1.5 bg-slate-100/50 text-[11px]">
                   <div className="flex justify-between text-slate-700">
                     <span>Total Gross Charges:</span>
                     <span>₹{(invoice.subTotal || 0).toLocaleString()}</span>
