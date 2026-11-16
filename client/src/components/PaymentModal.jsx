@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, CreditCard, CheckCircle2, AlertCircle } from 'lucide-react';
+import { api } from '../services/api';
 
 export default function PaymentModal({ invoice, onClose, onPaymentSuccess }) {
   const [amount, setAmount] = useState(invoice.balanceDue || 0);
@@ -23,17 +24,12 @@ export default function PaymentModal({ invoice, onClose, onPaymentSuccess }) {
     try {
       setLoading(true);
       setError('');
-      const res = await fetch(`/api/invoices/${invoice.id}/payment`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          paidAmount: Number(amount),
-          paymentMode,
-          transactionRef,
-          remarks
-        })
+      const data = await api.recordPayment(invoice.id, {
+        paidAmount: Number(amount),
+        paymentMode,
+        transactionRef,
+        remarks
       });
-      const data = await res.json();
       if (data.success) {
         onPaymentSuccess(data.data);
       } else {

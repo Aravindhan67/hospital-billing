@@ -1,4 +1,7 @@
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL ||
+  (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? '/api'
+    : 'https://hospital-billing-backend-9sv4.onrender.com/api');
 
 export const api = {
   // Health
