@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f1f5f9] text-slate-800 min-h-screen font-sans;
+  }
+}
+
+/* Custom traditional ERP styling */
+.theme-traditional {
+  --primary-color: #1e3a8a;
+  --primary-hover: #1e40af;
+  --accent-gold: #b45309;
+}
+
+/* Crisp traditional accounting grid */
+.ledger-border {
+  border: 1px solid #cbd5e1;
+}
+
+.ledger-table th {
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 6px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border: 1px solid #1e40af;
+}
+
+.ledger-table td {
+  padding: 6px 10px;
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+}
+
+.ledger-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.ledger-table tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Keyboard function key badges */
+kbd.fkey {
+  background-color: #e2e8f0;
+  border: 1px solid #94a3b8;
+  border-bottom: 2px solid #64748b;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1e293b;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+/* Print specific styles for hospital invoices */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-invoice, #printable-invoice * {
+    visibility: visible;
+  }
+  #printable-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    background: white;
+  }
+
+  /* Thermal 80mm roll specific print */
+  #printable-invoice.paper-thermal {
+    width: 78mm !important;
+    max-width: 78mm !important;
+    padding: 4px !important;
+    margin: 0 auto !important;
+    font-size: 11px !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
