@@ -4,8 +4,10 @@
   "description": "Backend API for CuraFlow Hospital Billing & HIS System",
   "main": "server.js",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "start": "node server.js",
+    "build": "npm --prefix ../client install && npm --prefix ../client run build || echo 'No client directory found, skipping client build'",
     "dev": "node --watch server.js"
   },
   "dependencies": {

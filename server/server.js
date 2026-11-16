@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { connectDB } from './config/db.js';
 import patientsRouter from './routes/patients.js';
@@ -58,14 +59,25 @@ app.get('/api/health', (req, res) => {
 
 // Serve static frontend build from client/dist if present
 const clientDist = path.join(__dirname, '../client/dist');
-app.use(express.static(clientDist));
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist));
 
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) {
-    return next();
-  }
-  res.sendFile(path.join(clientDist, 'index.html'));
-});
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.json({
+      status: 'active',
+      system: 'CuraFlow Hospital Billing & HIS API',
+      message: 'Backend API is running. Build frontend with npm run build to serve UI.',
+      endpoints: '/api/health'
+    });
+  });
+}
 
 // Start Server
 app.listen(PORT, () => {
